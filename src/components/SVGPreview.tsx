@@ -87,8 +87,7 @@ export const SVGPreview: React.FC<SVGPreviewProps> = ({
       </div>
 
       <div className="grid grid-cols-2 gap-3">
-        <button
-          onClick={onToggleColorLayer}
+        <div
           className={`
             p-4 border rounded-lg transition-all duration-200 text-left
             ${showColorLayer 
@@ -99,11 +98,18 @@ export const SVGPreview: React.FC<SVGPreviewProps> = ({
         >
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-medium">Color Layer</span>
-            {showColorLayer ? (
-              <Eye className="h-4 w-4 text-primary" />
-            ) : (
-              <EyeOff className="h-4 w-4 text-muted-foreground" />
-            )}
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={onToggleColorLayer}
+              className="h-6 w-6"
+            >
+              {showColorLayer ? (
+                <Eye className="h-3 w-3" />
+              ) : (
+                <EyeOff className="h-3 w-3" />
+              )}
+            </Button>
           </div>
           <p className="text-xs text-muted-foreground mb-2">
             Applies hue & saturation while preserving brightness
@@ -127,10 +133,9 @@ export const SVGPreview: React.FC<SVGPreviewProps> = ({
               />
             </div>
           )}
-        </button>
+        </div>
 
-        <button
-          onClick={onToggleOverlayLayer}
+        <div
           className={`
             p-4 border rounded-lg transition-all duration-200 text-left
             ${showOverlayLayer 
@@ -141,11 +146,18 @@ export const SVGPreview: React.FC<SVGPreviewProps> = ({
         >
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-medium">Overlay Layer</span>
-            {showOverlayLayer ? (
-              <Eye className="h-4 w-4 text-primary" />
-            ) : (
-              <EyeOff className="h-4 w-4 text-muted-foreground" />
-            )}
+            <Button
+              variant="outline"  
+              size="icon"
+              onClick={onToggleOverlayLayer}
+              className="h-6 w-6"
+            >
+              {showOverlayLayer ? (
+                <Eye className="h-3 w-3" />
+              ) : (
+                <EyeOff className="h-3 w-3" />
+              )}
+            </Button>
           </div>
           <p className="text-xs text-muted-foreground mb-2">
             Remaps brightness - darkens dark areas, lightens light areas
@@ -169,7 +181,7 @@ export const SVGPreview: React.FC<SVGPreviewProps> = ({
               />
             </div>
           )}
-        </button>
+        </div>
       </div>
     </div>
   );
