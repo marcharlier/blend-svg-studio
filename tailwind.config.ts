@@ -52,6 +52,20 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				// Creative tool specific colors
+				upload: {
+					DEFAULT: 'hsl(var(--upload-bg))',
+					border: 'hsl(var(--upload-border))',
+					hover: 'hsl(var(--upload-hover))'
+				},
+				preview: {
+					DEFAULT: 'hsl(var(--preview-bg))',
+					border: 'hsl(var(--preview-border))'
+				},
+				control: {
+					DEFAULT: 'hsl(var(--control-bg))',
+					border: 'hsl(var(--control-border))'
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
