@@ -1,15 +1,20 @@
 import React from 'react';
 import { Download, Eye, EyeOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Slider } from '@/components/ui/slider';
 
 interface SVGPreviewProps {
   imageData?: string;
   color: string;
   showColorLayer: boolean;
   showOverlayLayer: boolean;
+  colorLayerIntensity: number;
+  overlayLayerIntensity: number;
   onDownload: () => void;
   onToggleColorLayer: () => void;
   onToggleOverlayLayer: () => void;
+  onColorLayerIntensityChange: (value: number) => void;
+  onOverlayLayerIntensityChange: (value: number) => void;
 }
 
 export const SVGPreview: React.FC<SVGPreviewProps> = ({
@@ -17,9 +22,13 @@ export const SVGPreview: React.FC<SVGPreviewProps> = ({
   color,
   showColorLayer,
   showOverlayLayer,
+  colorLayerIntensity,
+  overlayLayerIntensity,
   onDownload,
   onToggleColorLayer,
   onToggleOverlayLayer,
+  onColorLayerIntensityChange,
+  onOverlayLayerIntensityChange,
 }) => {
   const generateSVG = () => {
     if (!imageData) return null;
@@ -38,8 +47,8 @@ export const SVGPreview: React.FC<SVGPreviewProps> = ({
         </defs>
         
         <use href="#bitmap"/>
-        ${showColorLayer ? `<rect id="rect" width="100%" height="100%" fill="${color}" style="mix-blend-mode: color;" mask="url(#embroidery-mask)" fill-opacity="0.5"/>` : ''}
-        ${showOverlayLayer ? `<rect id="rect2" width="100%" height="100%" fill="${color}" style="mix-blend-mode: overlay;" fill-opacity="1" mask="url(#embroidery-mask)"/>` : ''}
+        ${showColorLayer ? `<rect id="rect" width="100%" height="100%" fill="${color}" style="mix-blend-mode: color;" mask="url(#embroidery-mask)" fill-opacity="${colorLayerIntensity}"/>` : ''}
+        ${showOverlayLayer ? `<rect id="rect2" width="100%" height="100%" fill="${color}" style="mix-blend-mode: overlay;" fill-opacity="${overlayLayerIntensity}" mask="url(#embroidery-mask)"/>` : ''}
       </svg>
     `.trim();
   };
@@ -99,9 +108,25 @@ export const SVGPreview: React.FC<SVGPreviewProps> = ({
           <p className="text-xs text-muted-foreground mb-2">
             Applies hue & saturation while preserving brightness
           </p>
-          <p className="text-xs text-primary/70">
+          <p className="text-xs text-primary/70 mb-3">
             mix-blend-mode: color
           </p>
+          {showColorLayer && (
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-xs text-muted-foreground">Intensity</span>
+                <span className="text-xs text-primary font-mono">{Math.round(colorLayerIntensity * 100)}%</span>
+              </div>
+              <Slider
+                value={[colorLayerIntensity]}
+                onValueChange={(value) => onColorLayerIntensityChange(value[0])}
+                min={0}
+                max={1}
+                step={0.01}
+                className="w-full"
+              />
+            </div>
+          )}
         </button>
 
         <button
@@ -125,9 +150,25 @@ export const SVGPreview: React.FC<SVGPreviewProps> = ({
           <p className="text-xs text-muted-foreground mb-2">
             Remaps brightness - darkens dark areas, lightens light areas
           </p>
-          <p className="text-xs text-primary/70">
+          <p className="text-xs text-primary/70 mb-3">
             mix-blend-mode: overlay
           </p>
+          {showOverlayLayer && (
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-xs text-muted-foreground">Intensity</span>
+                <span className="text-xs text-primary font-mono">{Math.round(overlayLayerIntensity * 100)}%</span>
+              </div>
+              <Slider
+                value={[overlayLayerIntensity]}
+                onValueChange={(value) => onOverlayLayerIntensityChange(value[0])}
+                min={0}
+                max={1}
+                step={0.01}
+                className="w-full"
+              />
+            </div>
+          )}
         </button>
       </div>
     </div>

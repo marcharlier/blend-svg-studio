@@ -10,6 +10,8 @@ const Index = () => {
   const [color, setColor] = useState('#ff0077');
   const [showColorLayer, setShowColorLayer] = useState(true);
   const [showOverlayLayer, setShowOverlayLayer] = useState(true);
+  const [colorLayerIntensity, setColorLayerIntensity] = useState(0.5);
+  const [overlayLayerIntensity, setOverlayLayerIntensity] = useState(1.0);
   const { toast } = useToast();
 
   const handleImageUpload = (file: File, data: string) => {
@@ -41,8 +43,8 @@ const Index = () => {
   </defs>
 
   <use href="#bitmap"/>
-  ${showColorLayer ? `<rect id="rect" width="100%" height="100%" fill="${color}" style="mix-blend-mode: color;" mask="url(#embroidery-mask)" fill-opacity="0.5"/>` : ''}
-  ${showOverlayLayer ? `<rect id="rect2" width="100%" height="100%" fill="${color}" style="mix-blend-mode: overlay;" fill-opacity="1" mask="url(#embroidery-mask)"/>` : ''}
+  ${showColorLayer ? `<rect id="rect" width="100%" height="100%" fill="${color}" style="mix-blend-mode: color;" mask="url(#embroidery-mask)" fill-opacity="${colorLayerIntensity}"/>` : ''}
+  ${showOverlayLayer ? `<rect id="rect2" width="100%" height="100%" fill="${color}" style="mix-blend-mode: overlay;" fill-opacity="${overlayLayerIntensity}" mask="url(#embroidery-mask)"/>` : ''}
 </svg>`;
 
     const blob = new Blob([svgContent], { type: 'image/svg+xml' });
@@ -112,9 +114,13 @@ const Index = () => {
               color={color}
               showColorLayer={showColorLayer}
               showOverlayLayer={showOverlayLayer}
+              colorLayerIntensity={colorLayerIntensity}
+              overlayLayerIntensity={overlayLayerIntensity}
               onDownload={handleDownload}
               onToggleColorLayer={() => setShowColorLayer(!showColorLayer)}
               onToggleOverlayLayer={() => setShowOverlayLayer(!showOverlayLayer)}
+              onColorLayerIntensityChange={setColorLayerIntensity}
+              onOverlayLayerIntensityChange={setOverlayLayerIntensity}
             />
           </div>
 
