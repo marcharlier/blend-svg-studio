@@ -8,6 +8,41 @@ export const BlendModeExplainer: React.FC = () => {
         <h2 className="text-xl font-semibold mb-4">How this tool uses blend modes</h2>
         
         <div className="space-y-4">
+          {/* What this tool does */}
+          <div className="bg-control border border-control-border rounded-lg p-6">
+            <div className="flex items-start space-x-3 mb-4">
+              <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                <svg className="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg">What this tool does</h3>
+              </div>
+            </div>
+            
+            <div className="space-y-3 text-sm text-muted-foreground">
+              <p>
+                This tool lets you create an SVG that blends a bitmap with colour layers to make a 
+                <strong className="text-foreground"> re-colourable SVG that contains some texture</strong>, 
+                like embroidery patterns.
+              </p>
+              <ul className="list-disc list-inside space-y-2 ml-4">
+                <li>
+                  The <strong className="text-foreground">texture layer needs to be a grayscale texture image</strong> 
+                  - see below about Mid Gray for best results
+                </li>
+                <li>
+                  There are <strong className="text-foreground">two colour layers that use different blend modes</strong> 
+                  each - read below why it's these specific two modes
+                </li>
+                <li>
+                  The result is a single SVG file that can be recolored by changing the fill values
+                </li>
+              </ul>
+            </div>
+          </div>
+
           {/* Main Explanation */}
           <div className="bg-control border border-control-border rounded-lg p-6">
             <div className="flex items-start space-x-3 mb-4">

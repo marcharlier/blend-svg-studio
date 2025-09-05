@@ -63,14 +63,6 @@ export const ColorControls: React.FC<ColorControlsProps> = ({
             </div>
           </div>
 
-          {/* Layer Toggles */}
-          <div className="bg-control border border-control-border rounded-lg p-4">
-            <h3 className="font-medium mb-3">Layer Visibility</h3>
-            <p className="text-sm text-muted-foreground mb-4">
-              Click the preview cards above to toggle each blend layer on/off
-            </p>
-          </div>
-
           {/* Quick Color Presets */}
           <div className="bg-control border border-control-border rounded-lg p-4">
             <h3 className="font-medium mb-3">Quick Colors</h3>
