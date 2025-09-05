@@ -107,42 +107,46 @@ export const UploadArea: React.FC<UploadAreaProps> = ({
       </div>
 
       {!currentImage ? (
-        <div
-          className={`
-            relative border-2 border-dashed rounded-lg p-8 text-center transition-all duration-200
-            ${isDragOver 
-              ? 'border-primary bg-upload-hover' 
-              : 'border-upload-border bg-upload hover:bg-upload-hover hover:border-primary/50'
-            }
-          `}
-          onDrop={handleDrop}
-          onDragOver={handleDragOver}
-          onDragLeave={handleDragLeave}
-        >
-          <input
-            type="file"
-            accept=".jpg,.jpeg,.png"
-            onChange={handleFileInput}
-            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-          />
+        <div className="space-y-4">
+          <div
+            className={`
+              relative border-2 border-dashed rounded-lg p-8 text-center transition-all duration-200
+              ${isDragOver 
+                ? 'border-primary bg-upload-hover' 
+                : 'border-upload-border bg-upload hover:bg-upload-hover hover:border-primary/50'
+              }
+            `}
+            onDrop={handleDrop}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+          >
+            <input
+              type="file"
+              accept=".jpg,.jpeg,.png"
+              onChange={handleFileInput}
+              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+            />
+            
+            <div className="space-y-4 pointer-events-none">
+              <div className="mx-auto w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                <Upload className="h-6 w-6 text-primary" />
+              </div>
+              
+              <div>
+                <p className="text-lg font-medium">Drop your image here</p>
+                <p className="text-muted-foreground mt-1">
+                  or click to browse • JPG, PNG only
+                </p>
+              </div>
+            </div>
+          </div>
           
-          <div className="space-y-4">
-            <div className="mx-auto w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-              <Upload className="h-6 w-6 text-primary" />
-            </div>
-            
-            <div>
-              <p className="text-lg font-medium">Drop your image here</p>
-              <p className="text-muted-foreground mt-1">
-                or click to browse • JPG, PNG only
-              </p>
-            </div>
-            
+          <div className="flex justify-center">
             <Button
               onClick={loadExampleImage}
               variant="secondary"
               size="sm"
-              className="mt-4"
+              className="pointer-events-auto"
             >
               <Sparkles className="h-4 w-4 mr-2" />
               Try Example Image
