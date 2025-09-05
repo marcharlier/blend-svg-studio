@@ -72,11 +72,28 @@ export const UploadArea: React.FC<UploadAreaProps> = ({
     }
   };
 
-  const loadExampleImage = async () => {
+  const loadExampleImage1 = async () => {
     try {
       const response = await fetch('/lovable-uploads/ac0baf0a-896a-4460-9b98-2228132c7798.png');
       const blob = await response.blob();
       const file = new File([blob], 'example-swoosh.png', { type: 'image/png' });
+      
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const result = e.target?.result as string;
+        onImageUpload(file, result);
+      };
+      reader.readAsDataURL(blob);
+    } catch (error) {
+      setError('Failed to load example image');
+    }
+  };
+
+  const loadExampleImage2 = async () => {
+    try {
+      const response = await fetch('/lovable-uploads/027b101d-5e04-478b-98ed-021f349fe789.png');
+      const blob = await response.blob();
+      const file = new File([blob], 'example-knight.png', { type: 'image/png' });
       
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -141,15 +158,24 @@ export const UploadArea: React.FC<UploadAreaProps> = ({
             </div>
           </div>
           
-          <div className="flex justify-center">
+          <div className="flex justify-center gap-2">
             <Button
-              onClick={loadExampleImage}
+              onClick={loadExampleImage1}
               variant="secondary"
               size="sm"
               className="pointer-events-auto"
             >
               <Sparkles className="h-4 w-4 mr-2" />
-              Try Example Image
+              Example 1 (Swoosh)
+            </Button>
+            <Button
+              onClick={loadExampleImage2}
+              variant="secondary"
+              size="sm"
+              className="pointer-events-auto"
+            >
+              <Sparkles className="h-4 w-4 mr-2" />
+              Example 2 (Knight)
             </Button>
           </div>
         </div>
