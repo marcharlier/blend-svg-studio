@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Upload, X, AlertCircle } from 'lucide-react';
+import { Upload, X, AlertCircle, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface UploadAreaProps {
@@ -72,6 +72,23 @@ export const UploadArea: React.FC<UploadAreaProps> = ({
     }
   };
 
+  const loadExampleImage = async () => {
+    try {
+      const response = await fetch('/lovable-uploads/ac0baf0a-896a-4460-9b98-2228132c7798.png');
+      const blob = await response.blob();
+      const file = new File([blob], 'example-swoosh.png', { type: 'image/png' });
+      
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const result = e.target?.result as string;
+        onImageUpload(file, result);
+      };
+      reader.readAsDataURL(blob);
+    } catch (error) {
+      setError('Failed to load example image');
+    }
+  };
+
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
@@ -120,6 +137,16 @@ export const UploadArea: React.FC<UploadAreaProps> = ({
                 or click to browse • JPG, PNG only
               </p>
             </div>
+            
+            <Button
+              onClick={loadExampleImage}
+              variant="secondary"
+              size="sm"
+              className="mt-4"
+            >
+              <Sparkles className="h-4 w-4 mr-2" />
+              Try Example Image
+            </Button>
           </div>
         </div>
       ) : (
