@@ -5,7 +5,7 @@ export const BlendModeExplainer: React.FC = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-xl font-semibold mb-4">How Blend Modes Work</h2>
+        <h2 className="text-xl font-semibold mb-4">How this tool uses blend modes</h2>
         
         <div className="space-y-4">
           {/* Main Explanation */}

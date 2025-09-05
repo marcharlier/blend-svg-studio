@@ -8,6 +8,8 @@ interface SVGPreviewProps {
   showColorLayer: boolean;
   showOverlayLayer: boolean;
   onDownload: () => void;
+  onToggleColorLayer: () => void;
+  onToggleOverlayLayer: () => void;
 }
 
 export const SVGPreview: React.FC<SVGPreviewProps> = ({
@@ -16,6 +18,8 @@ export const SVGPreview: React.FC<SVGPreviewProps> = ({
   showColorLayer,
   showOverlayLayer,
   onDownload,
+  onToggleColorLayer,
+  onToggleOverlayLayer,
 }) => {
   const generateSVG = () => {
     if (!imageData) return null;
@@ -74,14 +78,17 @@ export const SVGPreview: React.FC<SVGPreviewProps> = ({
       </div>
 
       <div className="grid grid-cols-2 gap-3">
-        <div className={`
-          p-3 border rounded-lg transition-all duration-200
-          ${showColorLayer 
-            ? 'border-primary/50 bg-primary/5' 
-            : 'border-control-border bg-control'
-          }
-        `}>
-          <div className="flex items-center justify-between">
+        <button
+          onClick={onToggleColorLayer}
+          className={`
+            p-4 border rounded-lg transition-all duration-200 text-left
+            ${showColorLayer 
+              ? 'border-primary/50 bg-primary/5' 
+              : 'border-control-border bg-control'
+            }
+          `}
+        >
+          <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-medium">Color Layer</span>
             {showColorLayer ? (
               <Eye className="h-4 w-4 text-primary" />
@@ -89,19 +96,25 @@ export const SVGPreview: React.FC<SVGPreviewProps> = ({
               <EyeOff className="h-4 w-4 text-muted-foreground" />
             )}
           </div>
-          <p className="text-xs text-muted-foreground mt-1">
-            Applies hue & saturation
+          <p className="text-xs text-muted-foreground mb-2">
+            Applies hue & saturation while preserving brightness
           </p>
-        </div>
+          <p className="text-xs text-primary/70">
+            mix-blend-mode: color
+          </p>
+        </button>
 
-        <div className={`
-          p-3 border rounded-lg transition-all duration-200
-          ${showOverlayLayer 
-            ? 'border-primary/50 bg-primary/5' 
-            : 'border-control-border bg-control'
-          }
-        `}>
-          <div className="flex items-center justify-between">
+        <button
+          onClick={onToggleOverlayLayer}
+          className={`
+            p-4 border rounded-lg transition-all duration-200 text-left
+            ${showOverlayLayer 
+              ? 'border-primary/50 bg-primary/5' 
+              : 'border-control-border bg-control'
+            }
+          `}
+        >
+          <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-medium">Overlay Layer</span>
             {showOverlayLayer ? (
               <Eye className="h-4 w-4 text-primary" />
@@ -109,10 +122,13 @@ export const SVGPreview: React.FC<SVGPreviewProps> = ({
               <EyeOff className="h-4 w-4 text-muted-foreground" />
             )}
           </div>
-          <p className="text-xs text-muted-foreground mt-1">
-            Remaps brightness
+          <p className="text-xs text-muted-foreground mb-2">
+            Remaps brightness - darkens dark areas, lightens light areas
           </p>
-        </div>
+          <p className="text-xs text-primary/70">
+            mix-blend-mode: overlay
+          </p>
+        </button>
       </div>
     </div>
   );

@@ -113,6 +113,8 @@ const Index = () => {
               showColorLayer={showColorLayer}
               showOverlayLayer={showOverlayLayer}
               onDownload={handleDownload}
+              onToggleColorLayer={() => setShowColorLayer(!showColorLayer)}
+              onToggleOverlayLayer={() => setShowOverlayLayer(!showOverlayLayer)}
             />
           </div>
 

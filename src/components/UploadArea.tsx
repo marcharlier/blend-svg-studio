@@ -159,7 +159,7 @@ export const UploadArea: React.FC<UploadAreaProps> = ({
             <img
               src={currentImage}
               alt="Uploaded"
-              className="w-16 h-16 object-cover rounded border border-upload-border"
+              className="w-16 h-16 object-contain rounded border border-upload-border bg-background/10"
             />
             <div className="flex-1">
               <p className="font-medium">Image loaded</p>
