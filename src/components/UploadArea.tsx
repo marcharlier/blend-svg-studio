@@ -175,7 +175,7 @@ export const UploadArea: React.FC<UploadAreaProps> = ({
               className="pointer-events-auto"
             >
               <Sparkles className="h-4 w-4 mr-2" />
-              Example 2 (Knight)
+              Example 2 (Pony)
             </Button>
           </div>
         </div>
