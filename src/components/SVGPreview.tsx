@@ -38,7 +38,7 @@ export const SVGPreview: React.FC<SVGPreviewProps> = ({
     const { width, height } = imageDimensions;
 
     return `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" style="max-width: 100%; max-height: 500px; width: auto; height: auto;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="100%" height="auto">
         <defs>
           <image width="${width}" height="${height}" id="bitmap" href="${imageData}"></image>
           <mask id="embroidery-mask" maskUnits="userSpaceOnUse" mask-type="alpha">
@@ -69,22 +69,13 @@ export const SVGPreview: React.FC<SVGPreviewProps> = ({
         </Button>
       </div>
 
-      <div className="bg-preview border border-preview-border rounded-lg p-6 min-h-[300px] max-h-[600px] flex items-center justify-center overflow-auto">
+      <div className="bg-preview border border-preview-border rounded-lg p-6 min-h-[300px] flex items-center justify-center overflow-hidden">
         {imageData && svgContent ? (
           <div
-            className="w-full h-full flex items-center justify-center"
-          >
-            <div
-              className="max-w-full max-h-[500px] rounded border border-preview-border bg-background/5"
-              style={{ 
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                overflow: 'hidden'
-              }}
-              dangerouslySetInnerHTML={{ __html: svgContent }}
-            />
-          </div>
+            className="max-w-full max-h-[500px] w-auto h-auto rounded border border-preview-border bg-background/5"
+            style={{ objectFit: 'contain' }}
+            dangerouslySetInnerHTML={{ __html: svgContent }}
+          />
         ) : (
           <div className="text-center text-muted-foreground">
             <div className="w-16 h-16 mx-auto mb-4 bg-muted/20 rounded-full flex items-center justify-center">
