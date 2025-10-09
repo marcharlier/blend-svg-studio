@@ -7,6 +7,7 @@ import { useToast } from '@/hooks/use-toast';
 
 const Index = () => {
   const [imageData, setImageData] = useState<string | undefined>();
+  const [imageDimensions, setImageDimensions] = useState<{ width: number; height: number } | undefined>();
   const [color, setColor] = useState('#ff0077');
   const [showColorLayer, setShowColorLayer] = useState(true);
   const [showOverlayLayer, setShowOverlayLayer] = useState(true);
@@ -15,6 +16,13 @@ const Index = () => {
   const { toast } = useToast();
 
   const handleImageUpload = (file: File, data: string) => {
+    // Load image to get actual dimensions
+    const img = new Image();
+    img.onload = () => {
+      setImageDimensions({ width: img.width, height: img.height });
+    };
+    img.src = data;
+    
     setImageData(data);
     toast({
       title: "Image uploaded successfully",
@@ -24,6 +32,7 @@ const Index = () => {
 
   const handleClearImage = () => {
     setImageData(undefined);
+    setImageDimensions(undefined);
     toast({
       title: "Image cleared",
       description: "Upload a new image to continue",
@@ -31,12 +40,13 @@ const Index = () => {
   };
 
   const handleDownload = () => {
-    if (!imageData) return;
+    if (!imageData || !imageDimensions) return;
 
+    const { width, height } = imageDimensions;
     const svgContent = `<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 163">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}">
   <defs>
-    <image width="350" height="163" id="bitmap" href="${imageData}"></image>
+    <image width="${width}" height="${height}" id="bitmap" href="${imageData}"></image>
     <mask id="embroidery-mask" maskUnits="userSpaceOnUse" mask-type="alpha">
       <use href="#bitmap" />
     </mask>
@@ -111,6 +121,7 @@ const Index = () => {
           <div className="lg:col-span-1">
             <SVGPreview
               imageData={imageData}
+              imageDimensions={imageDimensions}
               color={color}
               showColorLayer={showColorLayer}
               showOverlayLayer={showOverlayLayer}

@@ -5,6 +5,7 @@ import { Slider } from '@/components/ui/slider';
 
 interface SVGPreviewProps {
   imageData?: string;
+  imageDimensions?: { width: number; height: number };
   color: string;
   showColorLayer: boolean;
   showOverlayLayer: boolean;
@@ -19,6 +20,7 @@ interface SVGPreviewProps {
 
 export const SVGPreview: React.FC<SVGPreviewProps> = ({
   imageData,
+  imageDimensions,
   color,
   showColorLayer,
   showOverlayLayer,
@@ -31,16 +33,14 @@ export const SVGPreview: React.FC<SVGPreviewProps> = ({
   onOverlayLayerIntensityChange,
 }) => {
   const generateSVG = () => {
-    if (!imageData) return null;
+    if (!imageData || !imageDimensions) return null;
 
-    // Extract image dimensions from the loaded image
-    const img = new Image();
-    img.src = imageData;
+    const { width, height } = imageDimensions;
 
     return `
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 163" width="100%" height="auto">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="100%" height="auto">
         <defs>
-          <image width="350" height="163" id="bitmap" href="${imageData}"></image>
+          <image width="${width}" height="${height}" id="bitmap" href="${imageData}"></image>
           <mask id="embroidery-mask" maskUnits="userSpaceOnUse" mask-type="alpha">
             <use href="#bitmap" />
           </mask>
