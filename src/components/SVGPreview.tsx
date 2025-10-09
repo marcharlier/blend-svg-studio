@@ -69,10 +69,11 @@ export const SVGPreview: React.FC<SVGPreviewProps> = ({
         </Button>
       </div>
 
-      <div className="bg-preview border border-preview-border rounded-lg p-6 min-h-[300px] flex items-center justify-center">
+      <div className="bg-preview border border-preview-border rounded-lg p-6 min-h-[300px] flex items-center justify-center overflow-hidden">
         {imageData && svgContent ? (
           <div
-            className="max-w-full max-h-[400px] rounded border border-preview-border bg-background/5"
+            className="max-w-full max-h-[500px] w-auto h-auto rounded border border-preview-border bg-background/5"
+            style={{ objectFit: 'contain' }}
             dangerouslySetInnerHTML={{ __html: svgContent }}
           />
         ) : (
