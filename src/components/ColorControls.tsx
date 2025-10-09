@@ -70,7 +70,8 @@ export const ColorControls: React.FC<ColorControlsProps> = ({
               {[
                 '#ff0077', '#00ff77', '#7700ff', '#ff7700',
                 '#0077ff', '#ff0000', '#00ff00', '#0000ff',
-                '#ffff00', '#ff00ff', '#00ffff', '#808080'
+                '#ffff00', '#ff00ff', '#00ffff', '#808080',
+                '#000000', '#ffffff'
               ].map((presetColor) => (
                 <button
                   key={presetColor}
