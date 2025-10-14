@@ -17,11 +17,11 @@ export const UploadArea: React.FC<UploadAreaProps> = ({
   const [error, setError] = useState<string | null>(null);
 
   const validateFile = (file: File): boolean => {
-    const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+    const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
     const maxSize = 10 * 1024 * 1024; // 10MB
 
     if (!validTypes.includes(file.type)) {
-      setError('Only JPG and PNG files are allowed');
+      setError('Only JPG, PNG, and WEBP files are allowed');
       return false;
     }
 
@@ -139,7 +139,7 @@ export const UploadArea: React.FC<UploadAreaProps> = ({
           >
             <input
               type="file"
-              accept=".jpg,.jpeg,.png"
+              accept=".jpg,.jpeg,.png,.webp"
               onChange={handleFileInput}
               className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
             />
@@ -152,7 +152,7 @@ export const UploadArea: React.FC<UploadAreaProps> = ({
               <div>
                 <p className="text-lg font-medium">Drop your image here</p>
                 <p className="text-muted-foreground mt-1">
-                  or click to browse • JPG, PNG only
+                  or click to browse • JPG, PNG, WEBP
                 </p>
               </div>
             </div>
