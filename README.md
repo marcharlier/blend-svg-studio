@@ -1,73 +1,51 @@
-# Welcome to your Lovable project
+## SVG Blend Studio
 
-## Project info
+### 1) What this app does
+SVG Blend Studio lets you upload a bitmap image (JPG, PNG, WEBP) and generate a single SVG that remains re‑colorable while preserving texture.
 
-**URL**: https://lovable.dev/projects/2d8665c9-d036-48c5-a4ee-26e223e3c24a
+It stacks two color layers using CSS blend modes:
+- **color**: applies hue/saturation of your chosen fill while preserving brightness
+- **overlay**: remaps brightness so blacks stay black, whites stay white, and mid‑gray shows pure fill
 
-## How can I edit this code?
+The result is a compact SVG you can re‑tint by changing fill values, ideal for textured artwork like embroidery patterns.
 
-There are several ways of editing your application.
+- **Live tool**: [GitHub Pages](https://marcharlier.github.io/blend-svg-studio/) 
 
-**Use Lovable**
+---
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/2d8665c9-d036-48c5-a4ee-26e223e3c24a) and start prompting.
+### 2) How it’s built and how to run it locally
+- **Stack**: Vite, React 18, TypeScript, Tailwind CSS, shadcn/ui (Radix primitives)
+- **CSS features**: `mix-blend-mode: color` and `mix-blend-mode: overlay`
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
+Run locally:
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Requirements: Node 18+ and npm
+npm install
 npm run dev
+# Dev server at http://localhost:5173 (default Vite port)
 ```
 
-**Edit a file directly in GitHub**
+Build a production bundle:
+```sh
+npm run build
+# Outputs to dist/
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Preview the production build locally:
+```sh
+npm run preview
+```
 
-**Use GitHub Codespaces**
+---
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### 3) How and where it’s deployed
+- **Platform**: GitHub Pages
+- **Automation**: GitHub Actions workflow at `.github/workflows/deploy.yml`
+- **Trigger**: On push to `main` (and manual dispatch)
+- **Process**:
+  - Install dependencies with `npm ci`
+  - Build with `npm run build` (Vite automatically sets the correct base using `GITHUB_REPOSITORY`)
+  - Upload `dist/` as the Pages artifact
+  - Deploy via `actions/deploy-pages`
 
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/2d8665c9-d036-48c5-a4ee-26e223e3c24a) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+After a successful run, the site is available at your repository’s Pages URL (typically `https://<username>.github.io/<repo>/`). If the link above doesn’t match your setup, update it to your repo’s Pages address.
