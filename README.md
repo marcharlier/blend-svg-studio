@@ -9,7 +9,7 @@ It stacks two color layers using CSS blend modes:
 
 The result is a compact SVG you can re‑tint by changing fill values, ideal for textured artwork like embroidery patterns.
 
-- **Live tool**: [GitHub Pages](https://marcharlier.github.io/blend-svg-studio/) 
+- **Live tool**: [GitHub Pages](https://engineering.unmade.com/blend-svg-studio/) 
 
 ---
 
@@ -47,5 +47,3 @@ npm run preview
   - Build with `npm run build` (Vite automatically sets the correct base using `GITHUB_REPOSITORY`)
   - Upload `dist/` as the Pages artifact
   - Deploy via `actions/deploy-pages`
-
-After a successful run, the site is available at your repository’s Pages URL (typically `https://<username>.github.io/<repo>/`). If the link above doesn’t match your setup, update it to your repo’s Pages address.
