@@ -74,7 +74,7 @@ export const UploadArea: React.FC<UploadAreaProps> = ({
 
   const loadExampleImage1 = async () => {
     try {
-      const response = await fetch('/lovable-uploads/ac0baf0a-896a-4460-9b98-2228132c7798.png');
+      const response = await fetch(`${import.meta.env.BASE_URL}lovable-uploads/ac0baf0a-896a-4460-9b98-2228132c7798.png`);
       const blob = await response.blob();
       const file = new File([blob], 'example-swoosh.png', { type: 'image/png' });
       
@@ -91,7 +91,7 @@ export const UploadArea: React.FC<UploadAreaProps> = ({
 
   const loadExampleImage2 = async () => {
     try {
-      const response = await fetch('/lovable-uploads/027b101d-5e04-478b-98ed-021f349fe789.png');
+      const response = await fetch(`${import.meta.env.BASE_URL}lovable-uploads/027b101d-5e04-478b-98ed-021f349fe789.png`);
       const blob = await response.blob();
       const file = new File([blob], 'example-knight.png', { type: 'image/png' });
       
